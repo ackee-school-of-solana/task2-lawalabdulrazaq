@@ -53,25 +53,45 @@ impl Calculator {
         // Return None in case of under/overflow.
         // Try to check the documentation of i64 type if you can
         // find some useful methods: https://doc.rust-lang.org/std/primitive.i64.html#implementations
-        todo!()
+
+
+        // answer
+        // we use the "checked_add" to add x and y value, to return none in case of under/overflow
+        self.x.checked_add(self.y)
     }
     /// Subtraction with Underflow/Overflow Resilience
     pub fn subtraction(&self) -> Option<i64> {
         // TODO Implement subtraction of calculator's x and y values.
         // Return None in case of under/overflow.
-        todo!()
+        
+
+        // answer
+        // we use the "checked_sub" to subtract x and y value.
+        self.x.checked_sub(self.y)
     }
     /// Multiplication with Underflow/Overflow Resilience
     pub fn multiplication(&self) -> Option<i64> {
         // TODO Implement multiplication of calculator's x and y values.
         // Return None in case of under/overflow.
-        todo!()
+        
+
+        // answer
+        // we use the "checked_mul" to multiply x and y value
+        self.x.checked_mul(self.y)
     }
     /// Division with Underflow/Overflow Resilience
     pub fn division(&self) -> Option<i64> {
         // TODO Implement division of calculator's x and y values.
         // Return None in case of division by zero.
-        todo!()
+        
+
+        // answer
+        // we use the "checked_div" to divide x and y value, to return none while using the division with zero check
+        if self.y == 0 {
+            None
+        } else {
+             self.x.checked_div(self.y)
+        }
     }
 }
 impl Rectangle {
@@ -89,7 +109,17 @@ impl Rectangle {
         // Notice that the fields a and b of Rectangle struct are private and can be access only by Rectangles methods
         // If the parameter is greater or equal to zero, update it and return Ok(())
         // otherwise return an Err (similar to try_new method)
-        todo!()
+       
+
+        // answer
+        // checking if parameter "a" is greater or equal to zero, update the value of "a"
+        if *a >= 0.0 {
+            self.a = *a;
+            Ok(())
+        } else {
+            // returing Err if "a" is negative
+            Err("Rectangle sides must be greater or equal to zero!")
+        }
     }
     /// Set side b
     pub fn set_b(&mut self, b: &f64) -> Result<(), &'static str> {
@@ -97,7 +127,16 @@ impl Rectangle {
         // Notice that the fields a and b of Rectangle struct are private and can be access only by Rectangles methods
         // If the parameter is greater or equal to zero, update it and return Ok(())
         // otherwise return an Err (similar to try_new method)
-        todo!()
+
+        // answer
+        // checking if parameter "b" is greater or equal to zero, update the value of "b"
+        if *b >= 0.0 {
+            self.b = *b;
+            Ok(())
+        } else {
+            // returing Err if "b" is negative
+            Err("Rectangle sides must be greater or equal to zero!")
+        }
     }
     /// Get for A
     pub fn get_a(&self) -> f64 {
@@ -121,7 +160,13 @@ impl Circle {
         // TODO Create and implement the setter method called `set_r` and set the field `r` of the Circle struct
         // If the parameter is greater or equal to zero, update it and return Ok(())
         // otherwise return an Err (similar to try_new method)
-        todo!()
+
+        if *r >= 0.0 {
+            self.r = *r;
+            Ok(())
+        } else {
+            Err("Circle radius must be greater or equal to zero!")
+        }
     }
     /// Get for Radius
     pub fn get_r(&self) -> f64 {
@@ -141,12 +186,28 @@ impl Shape for Rectangle {
     /// Computes Circumference of given Rectangle
     fn circumference(&self) -> f64 {
         // TODO Calculate the circumference of the rectangle.
-        todo!()
+        // Answer
+        // Calculate the Circumference of the Rectangle
+        2.0 * (self.a + self.b)
     }
 }
 
 // TODO Implement the Shape trait and its methods for the Circle struct
 // Hint: you can use std::f64::consts::PI
+//
+impl Shape for Circle {
+    /// Computes Area of given Circle
+    fn area(&self) -> f64 {
+        // Calculate the Area of given the Circle
+        std::f64::consts::PI * self.r * self.r 
+    }
+    /// Computes Circumference of given Circle 
+    fn circumference(&self) -> f64 {
+        2.0 * std::f64::consts::PI * self.r
+    }
+}
+
+
 
 // ------------------------------------------------------------------------------------------------
 // Examples
